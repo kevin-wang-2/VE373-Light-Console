@@ -23,9 +23,18 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>dmx.c</itemPath>
+    <itemPath>dmx.h</itemPath>
+    <itemPath>fixture.c</itemPath>
+    <itemPath>fixture.h</itemPath>
+    <itemPath>package_structure.c</itemPath>
+    <itemPath>package_structure.h</itemPath>
+    <itemPath>tick_timer.c</itemPath>
+    <itemPath>tick_timer.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>../../Desktop</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

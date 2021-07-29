@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=373Project.X
+PROJECTNAME=VE373-Light-Console
 
 # Active Configuration
 DEFAULTCONF=default
