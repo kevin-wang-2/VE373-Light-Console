@@ -146,11 +146,11 @@ unsigned int createSotwarePWM(volatile unsigned *pin, int frequency, int duty) {
     pwm_list[cur].duty_cycle = duty * pwm_list[cur].freq_cycle / 255;
     pwm_list[cur].target_duty = pwm_list[cur].duty_cycle;
     pwm_list[cur].cur_cycle = 0;
-    return cur;
+    return cur + 5;
 }
 
 void modifySoftwarePWM(unsigned int id, int duty) {
-    pwm_list[id].target_duty = duty * pwm_list[id].freq_cycle / 255;
+    pwm_list[id].target_duty = duty * pwm_list[id - 5].freq_cycle / 255;
 }
 
 void T1_init() {

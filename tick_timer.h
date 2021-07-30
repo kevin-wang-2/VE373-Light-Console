@@ -3,7 +3,7 @@
 
 #include <p32xxxx.h>
 
-#define PB_FREQ 24
+#define PB_FREQ 24 * 8
 #define T1_PR 800
 #define T1_prescaler 1
 #define MAX_TASK_CNT 100
