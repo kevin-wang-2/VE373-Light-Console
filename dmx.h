@@ -15,7 +15,7 @@ typedef struct {
 unsigned char DMX_buffer[512];
 dmx_bind_t DMX_bind[512];
 
-void setDMXValue(unsigned int address, unsigned char value);
+void DMX_setValue(unsigned int address, unsigned char value);
 
 #define CREATE_DMX_BIND(address, cb, fixture_id, param_id) DMX_bind[address].bind = 1;\
     DMX_bind[address].cb = cb;\
