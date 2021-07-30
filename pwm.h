@@ -12,8 +12,7 @@
 #define OC_CHANNEL(PORT) (PORT == &(PORTDbits.RD0)) ? 1 : \
                             (PORT) (PORT == &(PORTDbits.RD1)) ? 2 : \
                             (PORT) (PORT == &(PORTDbits.RD2)) ? 3 : \
-                            (PORT) (PORT == &(PORTDbits.RD3)) ? 4 : \
-                            5;
+                            (PORT) (PORT == &(PORTDbits.RD3)) ? 4 : 5
 
 #define IS_OC_CHANNEL(PORT) (PORT == &(PORTDbits.RD0)) || \
                              (PORT == &(PORTDbits.RD1)) || \
@@ -31,13 +30,30 @@ OCxRS(x) = duty * (T3_PR + 1) / 255;\
 modifySoftwarePWM(x, duty);\
 }
 
-#define PWM_CREATE_CHANNEL(PORT)\
-(IS_OC_CHANNEL(PORT)) ? OC_CHANNEL(PORT) : createSoftwarePWM(PORT, PWM_FREQ, 0); \
+#define PWM_HARDWARE_INIT(x) OCxCON(x) = 0x6; \
+    OCxR(x) = 0;\
+    OCxRS(x) = 0;\
+    OCxCON(x) |= 0x8000
+
+#define PWM_CREATE_CHANNEL(PORT) (IS_OC_CHANNEL(PORT)) ? OC_CHANNEL(PORT) : createSoftwarePWM(PORT, PWM_FREQ, 0); \
 if (IS_OC_CHANNEL(PORT)) { \
-OCxCON(OC_CHANNEL(PORT)) = 0x6; \
-OCxR(OC_CHANNEL(PORT)) = 0; \
-OCxRS(OC_CHANNEL(PORT)) = 0; \
-OCxCON(OC_CHANNEL(PORT)) |= 0x8000; \
+    switch(OC_CHANNEL(PORT)) { \
+        case 1: \
+            PWM_HARDWARE_INIT(1); \
+            break; \
+        case 12: \
+            PWM_HARDWARE_INIT(2); \
+            break; \
+        case 3: \
+            PWM_HARDWARE_INIT(3); \
+            break; \
+        case 4: \
+            PWM_HARDWARE_INIT(4); \
+            break; \
+        case 5: \
+            PWM_HARDWARE_INIT(5); \
+            break; \
+    } \
 }
 
 #endif /* _PWM_H */
