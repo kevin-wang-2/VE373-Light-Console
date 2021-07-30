@@ -22,7 +22,8 @@ typedef struct {
 
 typedef enum {
     FADER_0, FADER_1, FADER_2, FADER_3, FADER_4, FADER_5, FADER_6, FADER_7, FADER_8,
-            DMX, FUNCTION, CUE, PG_DOWN, PG_UP, STORE, CLEAR, CONFIRM 
+            DMX, FUNCTION, CUE, PG_DOWN, PG_UP, STORE, CLEAR, CONFIRM,
+            PROPERTY_DIMMER, PROPERTY_COLOR, PROPERTY_BEAM, PROPERTY_POSITION
 } button_t;
 
 typedef struct {

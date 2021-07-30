@@ -1,4 +1,5 @@
 #include "fader.h"
+#include "functional_utils.h"
 
 int pid_tick;
 
@@ -72,6 +73,26 @@ void fader_controller() {
                     *faders[i].negative_pin = 0;
                 }
                 faders[i].last_error = error;
+            }
+        } else {
+            switch (global_mode) {
+                case CHANNEL:
+                    if (DMX_buffer[page * 8 + i] != GET_SCALED_FADER_VALUE(i))
+                        DMX_setValue(page * 8 + i, GET_SCALED_FADER_VALUE(i));
+                    break;
+                case FUNCTION:
+                {
+                    unsigned int select;
+                    for (select = 0; select < selection_length; select) {
+                        unsigned int channel = fixtures[fixture_selected[select]].address
+                        + models[fixtures[fixture_selected[select]].model_id].params[i].offset;
+                        if (DMX_buffer[channel] != GET_SCALED_FADER_VALUE(i))
+                            setParameter(fixture_selected[select], i, GET_SCALED_FADER_VALUE(i));
+                    }
+                }
+                    break;
+                case CUE:
+                    break;
             }
         }
     }

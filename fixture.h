@@ -18,7 +18,7 @@ typedef struct {
         unsigned param_id;
         unsigned offset;
         unsigned valid: 1;
-    } params;
+    } params[8];
 } model_t;
 
 model_t models[16];
