@@ -71,7 +71,8 @@ unsigned generateSelectPackage(select_package_t *package, void *frame);
 void generateDMXPackage(DMX_package_t *package, void *frame);
 
 // Receive
-package_command_t extract_package(void *frame, void *pack);
+package_command_t extractPackage(void *frame, void *pack);
+unsigned int getPackageLength(unsigned char header);
 
 void extractFaderPackage(fader_package_t *package, void *frame);
 void extractButtonPackage(button_package_t *package, void *frame);

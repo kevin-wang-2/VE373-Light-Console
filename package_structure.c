@@ -121,7 +121,7 @@ unsigned generateDMXPackage(DMX_package_t *package, void *frame) {
 }
 
 // Receive
-package_command_t extract_package(void *frame, void *pack) {
+package_command_t extractPackage(void *frame, void *pack) {
     frame_t *ptr = frame;
     
     switch ((package_command_t)ptr->data) {
@@ -145,6 +145,23 @@ package_command_t extract_package(void *frame, void *pack) {
     }
     
     return ptr->data;
+}
+
+unsigned int getPackageLength(unsigned char header) {
+    switch((package_command_t)((frame_t *)(&header))->data) {
+        case HI:
+            return 1;
+        case FADER:
+            return 3;
+        case BUTTON:
+            return 2;
+        case MODEL:
+            return 3;
+        case PATCH:
+            return 4;
+        case SELECT:
+            return 3;
+    }
 }
 
 void extractFaderPackage(fader_package_t *package, void *frame) {
